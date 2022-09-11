@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -141,6 +142,7 @@ fun PokemonListItemContent(entry: PokedexListEntry, onImageClicked: () -> Unit) 
 
 @Composable
 fun ShowDetailButton(modifier: Modifier, onClick: () -> Unit) {
+    val context = LocalContext.current
     Box(modifier = modifier.clickable { onClick.invoke() }) {
         Row(
             modifier = Modifier
@@ -150,7 +152,7 @@ fun ShowDetailButton(modifier: Modifier, onClick: () -> Unit) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Show Details",
+                text = context.getString(R.string.show_details),
                 fontFamily = FontFamily(Font(R.font.font_hubballi)),
                 fontSize = 11.sp,
                 color = Color.Black
@@ -193,6 +195,7 @@ fun RetrySection(
     error: String,
     onRetry: () -> Unit
 ) {
+    val context = LocalContext.current
     Column {
         Text(error, color = Color.Red, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(8.dp))
@@ -200,7 +203,7 @@ fun RetrySection(
             onClick = { onRetry() },
             modifier = Modifier.align(CenterHorizontally)
         ) {
-            Text(text = "Retry")
+            Text(text = context.getString(R.string.retry))
         }
     }
 }

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Pokemon App</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="xp">XP</string>
+    <string name="abilities">Abilities</string>
+    <string name="gender">Gender:</string>
+    <string name="type">Type</string>
+    <string name="weaknesses">Weaknesses</string>
+    <string name="show_details">Show Details</string>
+    <string name="retry">Retry</string>
 </resources>

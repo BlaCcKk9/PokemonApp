@@ -1,5 +1,6 @@
 package com.example.pokemonapp.view.screens.pokemonDetail
 
+import android.provider.Settings.Global.getString
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.Font
@@ -23,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
@@ -147,6 +150,7 @@ fun BottomSection(pokemon: Pokemon, modifier: Modifier) {
 
 @Composable
 fun PokemonParameterRow(pokemon: Pokemon){
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .padding(top = 45.dp, start = 20.dp, end = 20.dp)
@@ -156,10 +160,10 @@ fun PokemonParameterRow(pokemon: Pokemon){
     ) {
         for (item in 0 until 4) {
             when(item){
-                0 -> {ParameterItem("Height", getHeightInM(pokemon))}
-                1 -> {ParameterItem("Weight", getWeightInKg(pokemon))}
-                2 -> {ParameterItem("XP", pokemon.base_experience.toString())}
-                3 -> {ParameterItem("Abilities", pokemon.abilities[0].ability.name)}
+                0 -> {ParameterItem(context.getString(R.string.height), getHeightInM(pokemon))}
+                1 -> {ParameterItem(context.getString(R.string.weight), getWeightInKg(pokemon))}
+                2 -> {ParameterItem(context.getString(R.string.xp), pokemon.base_experience.toString())}
+                3 -> {ParameterItem(context.getString(R.string.abilities), pokemon.abilities[0].ability.name)}
             }
             if (item != 3) {
                 Image(
@@ -195,6 +199,7 @@ fun ParameterItem(parameterName: String, parameterValue: String){
 
 @Composable
 fun GenderRow(){
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .padding(top = 13.dp, start = 20.dp)
@@ -204,7 +209,7 @@ fun GenderRow(){
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Gender:",
+            text = context.getString(R.string.gender),
             fontFamily = FontFamily(Font(R.font.font_hubballi)),
             color = Color(0xFF64A4AD),
             fontSize = 20.sp,
@@ -221,8 +226,9 @@ fun GenderRow(){
 
 @Composable
 fun TypeSection(pokemon: Pokemon){
+    val context = LocalContext.current
     Text(
-        text = "Type",
+        text = context.getString(R.string.type),
         fontFamily = FontFamily(Font(R.font.font_hubballi)),
         color = Color(0xFFACAD64),
         fontSize = 30.sp,
@@ -253,8 +259,9 @@ fun TypeSection(pokemon: Pokemon){
 // ესეთი ინფო არ მოიძებნა აპი-ში მაგრამ დიზაინი, რომ ლამაზად გამჩენილიყო ჰარდად დავტოვებ. იმედია არ მიწყენთ ;დ (სქესზეც ანალოგიურად)
 @Composable
 fun WeaknessesSection(){
+    val context = LocalContext.current
     Text(
-        text = "Weaknesses",
+        text = context.getString(R.string.weaknesses),
         fontFamily = FontFamily(Font(R.font.font_hubballi)),
         color = Color(0xFFAD6471),
         fontSize = 30.sp,
