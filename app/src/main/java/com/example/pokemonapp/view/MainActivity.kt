@@ -32,14 +32,11 @@ class MainActivity : ComponentActivity() {
 
                     composable(
                         "pokemon_detail_screen/{pokemonName}",
-                        arguments = listOf(navArgument("pokemonName"){
+                        arguments = listOf(navArgument("pokemonName") {
                             type = NavType.StringType
                         })
                     ) {
-                        val pokemonName = remember{
-                            it.arguments?.getString("pokemonName")
-                        }
-
+                        val pokemonName = remember { it.arguments?.getString("pokemonName") }
                         PokemonDetailScreen(pokemonName = pokemonName?.toLowerCase(Locale.ROOT) ?: "", navController)
                     }
                 }
