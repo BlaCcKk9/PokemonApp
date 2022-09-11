@@ -61,7 +61,7 @@ class PokemonListViewModel @Inject constructor(
 
     private fun getPokedexEntries(pokemonList: PokemonList): List<PokedexListEntry> =
         pokemonList.results.mapIndexed { index, entry ->
-            PokedexListEntry(entry.name.capitalize(Locale.ROOT), getImageUrlById(entry))
+            PokedexListEntry(entry.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }, getImageUrlById(entry))
         }
 
     private fun getImageUrlById(entry: Result): String {
