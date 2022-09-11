@@ -34,7 +34,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun PokemonListScreen(
-    navController: NavController?
+    navController: NavController
 ) {
     Surface(
         Modifier
@@ -49,7 +49,7 @@ fun PokemonListScreen(
 
 @Composable
 fun PokemonList(
-    navController: NavController?,
+    navController: NavController,
     viewModel: PokemonListViewModel = hiltViewModel()
 ) {
 
@@ -77,7 +77,7 @@ fun PokemonList(
 }
 @Composable
 fun PokemonListItem(
-    navController: NavController?,
+    navController: NavController,
     entry: PokedexListEntry
 ) {
     val showDialog = remember { mutableStateOf(false) }
@@ -102,7 +102,7 @@ fun PokemonListItem(
                 )
                 .background(color = Color(0xFFD4FFC5))
                 .align(BottomEnd)
-        ) {}
+        ) { navController.navigate("pokemon_detail_screen/${entry.pokemonName}") }
     }
 }
 
@@ -141,7 +141,7 @@ fun PokemonListItemContent(entry: PokedexListEntry, onImageClicked: () -> Unit) 
 
 @Composable
 fun ShowDetailButton(modifier: Modifier, onClick: () -> Unit) {
-    Box(modifier = modifier.clickable { }) {
+    Box(modifier = modifier.clickable { onClick.invoke() }) {
         Row(
             modifier = Modifier
                 .wrapContentSize()
@@ -209,13 +209,11 @@ fun RetrySection(
 fun ZoomPokemonImage(imageUrl: String, setShowDialog: (Boolean) -> Unit) {
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
-            modifier = Modifier
-                .background(Color.White)
-                .fillMaxWidth()
-                .requiredHeight(360.dp), shape = RoundedCornerShape(15.dp)
+            modifier = Modifier.requiredHeight(360.dp), color = Color.White, shape = RoundedCornerShape(15.dp)
         ) {
             Box(
                 modifier = Modifier
+                    .padding(30.dp)
                     .background(Color.White)
                     .fillMaxSize()
                     .clip(RoundedCornerShape(15.dp))
